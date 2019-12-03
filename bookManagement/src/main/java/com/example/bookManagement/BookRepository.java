@@ -1,9 +1,8 @@
-
 package com.example.bookManagement;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 
-public interface BookRepository extends JpaRepository<Mountain, Long>{
+public interface BookRepository extends JpaRepository<Book, Long>{
 }
