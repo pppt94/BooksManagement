@@ -1,6 +1,8 @@
 package com.example.bookManagement;
 
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,14 +22,39 @@ public class Book {
     @GeneratedValue
     Long id;
     private String title;
+    private String category;
+    @JsonIgnore
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
 
     Book() {
     }
 
-    Book(String title, Author author) {
+    Book(String title, String category, Author author) {
         this.title = title;
+        this.category = category;
         this.authors.add(author);
+    }
+
+    @JsonGetter
+    public List<String> getAuthorsNames() {
+
+        List<String> authorsNames = new ArrayList<>();
+
+        for(Author author:authors) {
+            authorsNames.add(author.getName());
+        }
+        return authorsNames;
+    }
+
+    @JsonGetter
+    public List<Long> getAuthorsId() {
+
+        List<Long> authorsId = new ArrayList<>();
+
+        for(Author author:authors) {
+            authorsId.add(author.getId());
+        }
+        return authorsId;
     }
 }

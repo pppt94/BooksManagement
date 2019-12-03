@@ -25,20 +25,19 @@ class AuthorController {
 
     // Single item
 
-    @GetMapping("/Authors/{id}")
+    @GetMapping("/authors/{id}")
     Author one(@PathVariable Long id) {
 
         return repository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id));
     }
 
-    @PutMapping("/Authors/{id}")
+    @PutMapping("/authors/{id}")
     Author replaceAuthor(@RequestBody Author newAuthor, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(Author -> {
-                    Author.setFirst_name(newAuthor.getFirst_name());
-                    Author.setSurname(newAuthor.getSurname());
+                    Author.setName(newAuthor.getName());
                     return repository.save(Author);
                 })
                 .orElseGet(() -> {
@@ -47,7 +46,7 @@ class AuthorController {
                 });
     }
 
-    @DeleteMapping("/Authors/{id}")
+    @DeleteMapping("/authors/{id}")
     void deleteAuthor(@PathVariable Long id) {
         repository.deleteById(id);
     }
