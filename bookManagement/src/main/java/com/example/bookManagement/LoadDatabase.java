@@ -17,9 +17,9 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository) {
 
         return args -> {
-            Author aut = new Author("J.R.R.", "Tolkien");
+            Author aut = new Author("J.R.R. Tolkien");
             authorRepository.save(aut);
-            bookRepository.save(new Book("Lord of The Rings", aut));
+            bookRepository.save(new Book("Lord of The Rings", "fantasy", aut));
         };
     }
 }

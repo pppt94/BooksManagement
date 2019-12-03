@@ -17,8 +17,7 @@ public class Author {
     private @Id
     @GeneratedValue
     Long id;
-    private String first_name;
-    private String surname;
+    private String name;
     @JsonIgnore
     @ManyToMany(mappedBy = "authors")
     private List<Book> books = new ArrayList<>();
@@ -26,9 +25,8 @@ public class Author {
     Author() {
     }
 
-    Author(String first_name, String surname) {
-        this.first_name = first_name;
-        this.surname = surname;
+    Author(String name) {
+        this.name = name;
     }
 
     @JsonGetter

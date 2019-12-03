@@ -37,8 +37,7 @@ class AuthorController {
 
         return repository.findById(id)
                 .map(Author -> {
-                    Author.setFirst_name(newAuthor.getFirst_name());
-                    Author.setSurname(newAuthor.getSurname());
+                    Author.setName(newAuthor.getName());
                     return repository.save(Author);
                 })
                 .orElseGet(() -> {
