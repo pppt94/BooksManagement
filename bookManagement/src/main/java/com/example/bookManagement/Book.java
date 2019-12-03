@@ -1,6 +1,7 @@
 package com.example.bookManagement;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class Book {
     @GeneratedValue
     Long id;
     private String title;
+    @JsonIgnore
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
 
