@@ -13,6 +13,12 @@ import javax.persistence.Id;
 public class Role {
 
     @Id
-    private int id;
+    private int role_id;
     private String role;
+
+    public Role(int id, String role) {
+        this.role_id = id;
+        this.role = role;
+    }
+
 }

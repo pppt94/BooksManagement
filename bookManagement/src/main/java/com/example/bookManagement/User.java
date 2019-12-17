@@ -16,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long user_id;
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
