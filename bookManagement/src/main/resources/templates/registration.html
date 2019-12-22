@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
+</head>
+
+<body>
+<div class="container registration-container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 registration">
+            <h3 class="form-signin-heading" align="center">Registration Form</h3>
+            <form autocomplete="off" action="#" th:action="@{/registration}"
+                  th:object="${user}" method="post" class="form-horizontal"
+                  role="form">
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="validation-message"></label>
+                        <input type="text" th:field="*{login}" placeholder="Login" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
+                        <input type="text" th:field="*{email}" placeholder="Email" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+                        <input type="password" th:field="*{password}" placeholder="Password" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <button type="submit" class="btnRegister">Register</button>
+                    </div>
+                </div>
+                <span th:utext="${successMessage}"></span>
+            </form>
+            <br/>
+            <form th:action="@{/login}" method="get">
+                <button class="btn btn-md btn-warning btn-block" type="Submit">Already got account?</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

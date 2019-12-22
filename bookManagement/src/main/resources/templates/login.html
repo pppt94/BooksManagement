@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
+</head>
+
+<body>
+<div class="container login-container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 login">
+            <h3 class="form-signin-heading" align="center">Welcome</h3>
+            <form th:action="@{/login}" method="post" class="form-signin">
+                <br/>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" id="email" name="email"  th:placeholder="Email" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <div align="center" th:if="${param.error}">
+                            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+                        </div>
+                        <button class="btnLogin" name="Submit" value="Login" type="Submit">Login</button>
+                        <div class="form-group">
+                            <a href="#" class="ForgotPwd">Forgot Password?</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br/>
+            <form th:action="@{/registration}" method="get">
+                <button class="btn btn-md btn-warning btn-block" type="Submit">Need Account?</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
