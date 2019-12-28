@@ -1,0 +1,250 @@
+table.books {
+  clear: both;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+  max-width: none !important;
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+
+table.books td,
+table.books th {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+table.books td.bookss_empty,
+table.books th.bookss_empty {
+  text-align: center;
+}
+
+table.books.nowrap th,
+table.books.nowrap td {
+  white-space: nowrap;
+}
+
+div.bookss_wrapper div.bookss_length label {
+  font-weight: normal;
+  text-align: left;
+  white-space: nowrap;
+}
+
+div.bookss_wrapper div.bookss_length select {
+  width: auto;
+  display: inline-block;
+}
+
+div.bookss_wrapper div.bookss_filter {
+  text-align: right;
+}
+
+div.bookss_wrapper div.bookss_filter label {
+  font-weight: normal;
+  white-space: nowrap;
+  text-align: left;
+}
+
+div.bookss_wrapper div.bookss_filter input {
+  margin-left: 0.5em;
+  display: inline-block;
+  width: auto;
+}
+
+div.bookss_wrapper div.bookss_info {
+  padding-top: 0.85em;
+  white-space: nowrap;
+}
+
+div.bookss_wrapper div.bookss_paginate {
+  margin: 0;
+  white-space: nowrap;
+  text-align: right;
+}
+
+div.bookss_wrapper div.bookss_paginate ul.pagination {
+  margin: 2px 0;
+  white-space: nowrap;
+  justify-content: flex-end;
+}
+
+div.bookss_wrapper div.bookss_processing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
+  margin-top: -26px;
+  text-align: center;
+  padding: 1em 0;
+}
+
+table.books thead > tr > th.sorting_asc, 
+table.books thead > tr > th.sorting_desc, 
+table.books thead > tr > th.sorting,
+table.books thead > tr > td.sorting_asc,
+table.books thead > tr > td.sorting_desc,
+table.books thead > tr > td.sorting {
+  padding-right: 30px;
+}
+
+table.books thead > tr > th:active,
+table.books thead > tr > td:active {
+  outline: none;
+}
+
+table.books thead .sorting,
+table.books thead .sorting_asc,
+table.books thead .sorting_desc,
+table.books thead .sorting_asc_disabled,
+table.books thead .sorting_desc_disabled {
+  cursor: pointer;
+  position: relative;
+}
+
+table.books thead .sorting:before, 
+table.books thead .sorting:after,
+table.books thead .sorting_asc:before,
+table.books thead .sorting_asc:after,
+table.books thead .sorting_desc:before,
+table.books thead .sorting_desc:after,
+table.books thead .sorting_asc_disabled:before,
+table.books thead .sorting_asc_disabled:after,
+table.books thead .sorting_desc_disabled:before,
+table.books thead .sorting_desc_disabled:after {
+  position: absolute;
+  bottom: 0.9em;
+  display: block;
+  opacity: 0.3;
+}
+
+table.books thead .sorting:before,
+table.books thead .sorting_asc:before,
+table.books thead .sorting_desc:before,
+table.books thead .sorting_asc_disabled:before,
+table.books thead .sorting_desc_disabled:before {
+  right: 1em;
+  content: "\2191";
+}
+
+table.books thead .sorting:after,
+table.books thead .sorting_asc:after,
+table.books thead .sorting_desc:after,
+table.books thead .sorting_asc_disabled:after,
+table.books thead .sorting_desc_disabled:after {
+  right: 0.5em;
+  content: "\2193";
+}
+
+table.books thead .sorting_asc:before,
+table.books thead .sorting_desc:after {
+  opacity: 1;
+}
+
+table.books thead .sorting_asc_disabled:before,
+table.books thead .sorting_desc_disabled:after {
+  opacity: 0;
+}
+
+div.bookss_scrollHead table.books {
+  margin-bottom: 0 !important;
+}
+
+div.bookss_scrollBody table {
+  border-top: none;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+div.bookss_scrollBody table thead .sorting:before,
+div.bookss_scrollBody table thead .sorting_asc:before,
+div.bookss_scrollBody table thead .sorting_desc:before,
+div.bookss_scrollBody table thead .sorting:after,
+div.bookss_scrollBody table thead .sorting_asc:after,
+div.bookss_scrollBody table thead .sorting_desc:after {
+  display: none;
+}
+
+div.bookss_scrollBody table tbody tr:first-child th,
+div.bookss_scrollBody table tbody tr:first-child td {
+  border-top: none;
+}
+
+div.bookss_scrollFoot > .bookss_scrollFootInner {
+  box-sizing: content-box;
+}
+
+div.bookss_scrollFoot > .bookss_scrollFootInner > table {
+  margin-top: 0 !important;
+  border-top: none;
+}
+
+@media screen and (max-width: 767px) {
+  div.bookss_wrapper div.bookss_length,
+  div.bookss_wrapper div.bookss_filter,
+  div.bookss_wrapper div.bookss_info,
+  div.bookss_wrapper div.bookss_paginate {
+    text-align: center;
+  }
+}
+
+table.books.table-sm > thead > tr > th {
+  padding-right: 20px;
+}
+
+table.books.table-sm .sorting:before,
+table.books.table-sm .sorting_asc:before,
+table.books.table-sm .sorting_desc:before {
+  top: 5px;
+  right: 0.85em;
+}
+
+table.books.table-sm .sorting:after,
+table.books.table-sm .sorting_asc:after,
+table.books.table-sm .sorting_desc:after {
+  top: 5px;
+}
+
+table.table-bordered.books th,
+table.table-bordered.books td {
+  border-left-width: 0;
+}
+table.table-bordered.books th:last-child, 
+table.table-bordered.books th:last-child,
+table.table-bordered.books td:last-child,
+table.table-bordered.books td:last-child {
+  border-right-width: 0;
+}
+
+table.table-bordered.books tbody th,
+table.table-bordered.books tbody td {
+  border-bottom-width: 0;
+}
+
+div.bookss_scrollHead table.table-bordered {
+  border-bottom-width: 0;
+}
+
+div.table-responsive > div.bookss_wrapper > div.row {
+  margin: 0;
+}
+
+div.table-responsive > div.bookss_wrapper > div.row > div[class^="col-"]:first-child {
+  padding-left: 0;
+}
+
+div.table-responsive > div.bookss_wrapper > div.row > div[class^="col-"]:last-child {
+  padding-right: 0;
+}
+
+.btnProfile{
+    width: 10%;
+	float: right;
+	margin-bottom: 5px;
+    border-radius: 2rem;
+    padding: 0.5%;
+    border: none;
+    cursor: pointer;
+	font-weight: 600;
+	color: #fff;
+    background-color: #0062cc;
+}

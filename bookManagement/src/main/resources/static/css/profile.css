@@ -1,0 +1,75 @@
+.profile-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.profile{
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profile form-signin-heading{
+    text-align: center;
+    color: #333;
+}
+
+.profile-container form{
+    display: inline;
+    padding: 100%;
+}
+
+.btnAdd{
+    width: 20%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.profile .btnAdd{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+
+.btnDel{
+    width: 20%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.profile .btnDel{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+
+.btnBooks{
+    width: 20%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.profile .btnBooks{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+
+.btnLogout{
+    width: 20%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.profile .btnLogout{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}

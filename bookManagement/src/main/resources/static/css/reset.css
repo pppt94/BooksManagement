@@ -1,0 +1,33 @@
+.reset-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.reset{
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.reset form-signin-heading{
+    text-align: center;
+    color: #333;
+}
+
+.reset-container form{
+    display: inline;
+    padding: 10%;
+}
+
+.btnReset{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.reset .btnReset{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
