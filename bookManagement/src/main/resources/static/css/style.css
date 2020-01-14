@@ -90,6 +90,8 @@ display: inline-block;
 background: #eee;
     display: block;
     margin: 25px;
+
+    margin-bottom: 0;
     min-height: 34em;
     overflow: hidden;
     position: relative;
@@ -122,3 +124,9 @@ display:block;}
 
 .col-md-7 {
 display:block;}
+
+#buttonContainer{
+display: flex;
+justify-content: space-around;
+margin:15px;
+}

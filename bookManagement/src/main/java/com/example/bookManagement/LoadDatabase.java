@@ -35,11 +35,11 @@ public class LoadDatabase {
             authorRepository.save(aut5);
 
             //Books
-            bookRepository.save(new Book("Lord of The Rings", "fantasy", aut1));
-            bookRepository.save(new Book("Hobbit", "fantasy", aut1));
-            bookRepository.save(new Book("Nineteen Eighty-Four", "novel", aut2));
-            bookRepository.save(new Book("Animal Farm", "novel", aut2));
-            bookRepository.save(new Book("Catch-22", "novel", aut3));
+            bookRepository.save(new Book("Lord of The Rings", "fantasy", aut1, "CCC", 2001));
+            bookRepository.save(new Book("Hobbit", "fantasy", aut1, "CCC", 2000));
+            bookRepository.save(new Book("Nineteen Eighty-Four", "novel", aut2, "BBB", 2010));
+            bookRepository.save(new Book("Animal Farm", "novel", aut2, "AAA", 2010));
+            bookRepository.save(new Book("Catch-22", "novel", aut3, "AAA", 1990));
         };
     }
 }

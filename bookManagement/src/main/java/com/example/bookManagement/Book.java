@@ -26,14 +26,18 @@ public class Book {
     @JsonIgnore
     @ManyToMany
     private List<Author> authors = new ArrayList<>();
+    private String publisher;
+    private int year;
 
     Book() {
     }
 
-    Book(String title, String category, Author author) {
+    Book(String title, String category, Author author, String publisher, int year) {
         this.title = title;
         this.category = category;
         this.authors.add(author);
+        this.publisher = publisher;
+        this.year = year;
     }
 
     @JsonGetter

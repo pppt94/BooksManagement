@@ -16,23 +16,11 @@
 
 <body class="data-table">
 <div class="topnav" id="myTopnav">
-    <a href="/index" class="active">Book Management</a>
-    <a href="#news">My books</a>
+    <a href="/" class="active">Book Management</a>
+    <a href="/">My books</a>
     <a href="#contact">My wishlist</a>
+    <a href="/profile">Profile</a>
     <a href="#about">Stats</a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-        <i class="fa fa-bars"></i>
-    </a>
-    <div class="profile">
-        <a href="javascript:void(0);" class="icons" style="
-  padding: 14px 16px;">
-            <i class="fa fa-user"></i>
-        </a>
-        <a href="javascript:void(0);" class="icons"style="
-  padding: 14px 16px;">
-            <i class="fa fa-sign-out"></i>
-        </a>
-    </div>
 </div>
 <div class="board" style="height:100%;">
     <div class="board_step" style="width:100%;">
@@ -44,17 +32,23 @@
                         <th>Title</th>
                         <th>Category</th>
                         <th>Authors</th>
+                        <th>Publisher</th>
+                        <th>Publication date</th>
                     </tr>
                     </thead>
                 </table>
             </div>
         </div>
+
+        <div id="buttonContainer">
+            <button type="button" class="btn btn-success btn-lg">Add book</button>
+
+            <button type="button" class="btn btn-danger btn-lg">Delete book</button>
+
+        </div>
     </div>
 </div>
 
-<button type="button" class="btnProfile" style="background-color=green">Add</button>
-
-<button type="button" class="btnProfile" style="background-color=red">Delete</button>
 
 </body>
 <script>
@@ -68,7 +62,9 @@
         "columns": [
             { "data": "title"},
             { "data": "category" },
-            { "data": "authorsNames" }
+            { "data": "authorsNames" },
+            { "data": "publisher" },
+            { "data": "year" }
         ],
         "lengthMenu": [8]
     } );
