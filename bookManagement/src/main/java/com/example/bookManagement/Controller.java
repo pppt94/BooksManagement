@@ -9,15 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @org.springframework.stereotype.Controller
 public class Controller {
 
-    @RequestMapping(value="/index", produces = {
-            MediaType.TEXT_HTML_VALUE},
-            method = RequestMethod.GET)
-    public String view () {
-        return "index.html";
-    }
     @GetMapping("/")
     public String root() {
-        return "index";
+        return "books";
     }
 
     @GetMapping("/login")
@@ -28,5 +22,23 @@ public class Controller {
     @GetMapping("/user")
     public String userIndex() {
         return "user/index";
+    }
+
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+
+
+    @GetMapping("/recover")
+    public String recover() {
+        return "recover";
+    }
+
+
+    @GetMapping("/reset")
+    public String reset() {
+        return "reset";
     }
 }

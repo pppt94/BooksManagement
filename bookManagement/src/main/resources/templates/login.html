@@ -1,49 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Login</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/login.css"/>
-</head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <title>Registration</title>
+</head>
 <body>
-<div class="container login-container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-6 login">
-            <h3 class="form-signin-heading" align="center">Welcome</h3>
-            <form th:action="@{/login}" method="post" class="form-signin">
-                <br/>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <input type="text" id="email" name="email"  th:placeholder="Email" class="form-control"/>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Login page</h1>
+            <form th:action="@{/login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        Invalid username or password.
+                    </div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">
+                        You have been logged out.
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-9">
-                        <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
-                    </div>
+                    <label for="username">Username</label>:
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           class="form-control"
+                           autofocus="autofocus"
+                           placeholder="Username"/>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-9">
-                        <div align="center" th:if="${param.error}">
-                            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+                    <label for="password">Password</label>:
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="Password"/>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="login-submit"
+                                   id="login-submit"
+                                   class="form-control btn btn-info"
+                                   value="Log In"/>
                         </div>
-                        <button class="btnLogin" name="Submit" value="Login" type="Submit">Login</button>
-                        <div class="form-group">
-                            <a href="#" class="ForgotPwd">Forgot Password?</a>
-                        </div>
                     </div>
                 </div>
-            </form>
-            <br/>
-            <form th:action="@{/registration}" method="get">
-                <button class="btn btn-md btn-warning btn-block" type="Submit">Need Account?</button>
+                <div class="form-group">
+                    <span>New user? <a href="/" th:href="@{/registration}">Register here</a></span>
+                </div>
             </form>
         </div>
     </div>
+
+
 </div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
 </body>
 </html>

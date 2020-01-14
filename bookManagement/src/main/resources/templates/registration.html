@@ -1,53 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Register</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/registration.css"/>
-</head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Registration</title>
+</head>
 <body>
-<div class="container registration-container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-md-6 registration">
-            <h3 class="form-signin-heading" align="center">Registration Form</h3>
-            <form autocomplete="off" action="#" th:action="@{/registration}"
-                  th:object="${user}" method="post" class="form-horizontal"
-                  role="form">
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="validation-message"></label>
-                        <input type="text" th:field="*{login}" placeholder="Login" class="form-control" />
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div th:if="${param.success}">
+
+            </div>
+
+            <h1>Registration</h1>
+            <form th:action="@{/registration}" th:object="${user}" method="post">
+
+                <p class="error-message"
+                   th:if="${#fields.hasGlobalErrors()}"
+                   th:each="error : ${#fields.errors('global')}"
+                   th:text="${error}">Validation error</p>
+
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+                    <label for="firstName" class="control-label">First name</label>
+                    <input id="firstName"
+                           class="form-control"
+                           th:field="*{firstName}"/>
+                    <p class="error-message"
+                       th:each="error: ${#fields.errors('firstName')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                    <label for="lastName" class="control-label">Last name</label>
+                    <input id="lastName"
+                           class="form-control"
+                           th:field="*{lastName}"/>
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('lastName')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
+                    <label for="email" class="control-label">E-mail</label>
+                    <input id="email"
+                           class="form-control"
+                           th:field="*{email}"/>
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('email')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                    <label for="password" class="control-label">Password</label>
+                    <input id="password"
+                           class="form-control"
+                           type="password"
+                           th:field="*{password}"/>
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('password')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
+                    <input id="terms"
+                           type="checkbox"
+                           th:field="*{terms}"/>
+                    <label class="control-label" for="terms">
+                        I agree with the <a href="#">terms and conditions</a> for Registration.
+                    </label>
+                    <p class="error-message"
+                       th:each="error : ${#fields.errors('terms')}"
+                       th:text="${error}">Validation error</p>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
-                        <input type="text" th:field="*{email}" placeholder="Email" class="form-control" />
-                    </div>
+                    <button type="submit" class="btn btn-success">Register</button>
+                    <span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
-                        <input type="password" th:field="*{password}" placeholder="Password" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-9">
-                        <button type="submit" class="btnRegister">Register</button>
-                    </div>
-                </div>
-                <span th:utext="${successMessage}"></span>
-            </form>
-            <br/>
-            <form th:action="@{/login}" method="get">
-                <button class="btn btn-md btn-warning btn-block" type="Submit">Already got account?</button>
+
             </form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+
 </body>
 </html>
