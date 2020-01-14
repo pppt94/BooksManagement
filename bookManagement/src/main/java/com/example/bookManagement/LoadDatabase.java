@@ -14,9 +14,13 @@ import java.util.List;
 public class LoadDatabase {
 
     @Bean
-    CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository) {
+    CommandLineRunner initDatabase(AuthorRepository authorRepository, BookRepository bookRepository, UserService userService) {
 
         return args -> {
+
+
+            User u = new User("Jan", "Kowalski", "a@a.a", "aaa");
+            userService.save(u);
 
             //Authors
             Author aut1 = new Author("J.R.R. Tolkien");

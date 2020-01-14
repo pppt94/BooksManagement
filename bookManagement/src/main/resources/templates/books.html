@@ -11,37 +11,68 @@
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
     <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap4.js"></script>
-    <script type="text/javascript" language="javascript" class="init">
-
-    	$(document).ready(function() {
-		var table = $('#dt').DataTable();
-
-		$('#dt tbody').on( 'click', 'tr', function () {
-			$(this).toggleClass('selected');
-		} );
-
-		$('#button').click( function () {
-			alert( table.rows('.selected').data().length +' row(s) selected' );
-		} );
-	} );
-	</script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body class="data-table">
-<div class="container">
-    <section>
-        <h1>Book Management</h1>
-		<button type="button" class="btnProfile" style="">Profile</button>
-        <table id="dt" class="table table-striped table-bordered" style="width:100%">
-            <thead>
-            <tr>
-                <th>Author</th>
-                <th>Book</th>
-                <th>Year</th>
-            </tr>
-            </thead>
-        </table>
-    </section>
+<div class="topnav" id="myTopnav">
+    <a href="/index" class="active">Book Management</a>
+    <a href="#news">My books</a>
+    <a href="#contact">My wishlist</a>
+    <a href="#about">Stats</a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+    </a>
+    <div class="profile">
+        <a href="javascript:void(0);" class="icons" style="
+  padding: 14px 16px;">
+            <i class="fa fa-user"></i>
+        </a>
+        <a href="javascript:void(0);" class="icons"style="
+  padding: 14px 16px;">
+            <i class="fa fa-sign-out"></i>
+        </a>
+    </div>
 </div>
+<div class="board" style="height:100%;">
+    <div class="board_step" style="width:100%;">
+        <div class="customTable">
+            <div class="customTablePanel" style="margin:10px;">
+                <table id="dt" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Authors</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btnProfile" style="background-color=green">Add</button>
+
+<button type="button" class="btnProfile" style="background-color=red">Delete</button>
+
 </body>
+<script>
+    $(document).ready(function() {
+    $('#dt').DataTable( {
+
+        "ajax": {
+            "url": "/books",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "title"},
+            { "data": "category" },
+            { "data": "authorsNames" }
+        ],
+        "lengthMenu": [8]
+    } );
+} );
+
+</script>
 </html>
