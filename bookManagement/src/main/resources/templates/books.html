@@ -12,6 +12,7 @@
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
     <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap4.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -20,6 +21,7 @@
     <a href="/" class="active">Book Management</a>
     <a href="/">My books</a>
     <a href="#contact">My wishlist</a>
+    <a href="#contact">Reading history</a>
     <a href="/profile">Profile</a>
     <a href="#about">Stats</a>
 </div>
@@ -43,7 +45,7 @@
 
         <div id="buttonContainer">
             <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#addBookModal">Add book</button>
-            <button type="button" class="btn btn-danger btn-lg">Delete book</button>
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#delBookModal">Delete book</button>
         </div>
         <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -85,6 +87,28 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="delBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="deleteSelect">Choose book to delete</label>
+                        <select class="form-control" id="deleteSelect">
+
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="del">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -93,7 +117,7 @@
 
 </body>
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     $('#dt').DataTable( {
 
         "ajax": {
@@ -140,6 +164,17 @@ $.ajax({
     }
 });
 
+$.ajax({
+    type: "GET",
+    url: "/books",
+    success: function(data) {
+        var mySelect = $('#deleteSelect');
+        $.each(data, function (index, value) {
+            mySelect.append($('<option></option>').val(index).html(value.title))
+        });
+    }
+});
+
 $("#add").click( function() {
 
 var book = {"title": $('#title').val(),
@@ -163,6 +198,8 @@ var book = {"title": $('#title').val(),
             });
     window.location.reload();
 });
+
+
 
 </script>
 </html>
