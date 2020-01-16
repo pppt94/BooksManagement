@@ -46,4 +46,10 @@ public class Controller {
     public String wishlist() {
         return "wishlist";
     }
+
+
+    @GetMapping("/reading")
+    public String reading() {
+        return "reading";
+    }
 }

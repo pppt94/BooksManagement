@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+    <title>Book Management</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTables.bootstrap4.css">
+    <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="data-table">
+<div class="topnav" id="myTopnav">
+    <a href="/" class="active">Book Management</a>
+    <a href="/">My books</a>
+    <a href="/wishlist">My wishlist</a>
+    <a href="/reading">Reading history</a>
+    <a href="/profile">Profile</a>
+    <a href="#about">Stats</a>
+</div>
+<div class="board" style="height:100%;">
+    <div class="board_step" style="width:100%;">
+        <div class="customTable">
+            <div class="customTablePanel" style="margin:10px;">
+                <table id="dt" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Authors</th>
+                        <th>Publisher</th>
+                        <th>Publication date</th>
+                        <th>Reading date</th>
+                        <th>Rating</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+        <div id="buttonContainer">
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#addReadModal">Add book</button>
+        </div>
+        <div class="modal fade" id="addReadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add read</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="add">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+<script>
+</script>
+</html>
