@@ -29,6 +29,9 @@ public class Book {
     @JsonIgnore
     @ManyToMany
     private List<User> users = new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany
+    private List<User> usersWishlist = new ArrayList<>();
 
     Book() {
     }
@@ -53,6 +56,11 @@ public class Book {
 
     void addUser(User user) {
         this.users.add(user);
+        //user.getBooks().add(this);
+    }
+
+    void addUserWishlist(User user) {
+        this.getUsersWishlist().add(user);
         //user.getBooks().add(this);
     }
 

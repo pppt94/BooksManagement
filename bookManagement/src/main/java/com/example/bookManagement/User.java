@@ -24,6 +24,11 @@ public class User {
     @ManyToMany(mappedBy = "users", cascade=CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
 
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "usersWishlist", cascade=CascadeType.ALL)
+    private List<Book> books_wishlist = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -106,6 +111,10 @@ public class User {
 
     public Collection<Book> getBooks() {
         return books;
+    }
+
+    public Collection<Book> getWishlistBooks() {
+        return books_wishlist;
     }
 
 

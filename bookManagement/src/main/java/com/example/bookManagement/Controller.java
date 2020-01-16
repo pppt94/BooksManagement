@@ -41,4 +41,9 @@ public class Controller {
     public String reset() {
         return "reset";
     }
+
+    @GetMapping("/wishlist")
+    public String wishlist() {
+        return "wishlist";
+    }
 }
