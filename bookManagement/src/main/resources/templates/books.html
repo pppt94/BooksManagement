@@ -121,7 +121,7 @@ $(document).ready(function() {
     $('#dt').DataTable( {
 
         "ajax": {
-            "url": "/books",
+            "url": "/user/books",
             "dataSrc": ""
         },
         "columns": [
@@ -170,7 +170,7 @@ $.ajax({
     success: function(data) {
         var mySelect = $('#deleteSelect');
         $.each(data, function (index, value) {
-            mySelect.append($('<option></option>').val(index).html(value.title))
+            mySelect.append($('<option></option>').val(value.id).html(value.title))
         });
     }
 });
@@ -199,7 +199,19 @@ var book = {"title": $('#title').val(),
     window.location.reload();
 });
 
+$("#del").click( function() {
+    var name = $("#deleteSelect option:selected").html();
+    var id = $("#deleteSelect").val();
 
+
+$.ajax({
+    type: "DELETE",
+    url: "/books/".concat(id),
+    success: function(data) {
+    }
+});
+
+});
 
 </script>
 </html>

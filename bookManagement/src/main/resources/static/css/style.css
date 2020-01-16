@@ -132,5 +132,9 @@ margin:15px;
 }
 
 #addBookModal{
-text-align:left;
-}
+ text-align:left;
+ }
+
+ #delBookModal{
+ text-align:left;
+ }

@@ -1,6 +1,9 @@
 package com.example.bookManagement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +20,10 @@ public class User {
     private String email;
     private String password;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "users", cascade=CascadeType.ALL)
+    private List<Book> books = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -27,6 +34,11 @@ public class User {
     private Collection<Role> roles;
 
     public User() {
+    }
+
+    void addBook(Book book) {
+        this.books.add(book);
+        book.getUsers().add(this);
     }
 
     public User(String firstName, String lastName, String email, String password) {
@@ -91,6 +103,11 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
+    public Collection<Book> getBooks() {
+        return books;
+    }
+
 
     @Override
     public String toString() {

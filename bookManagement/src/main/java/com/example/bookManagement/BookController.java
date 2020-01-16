@@ -1,5 +1,8 @@
 package com.example.bookManagement;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,16 +12,33 @@ class BookController {
 
     private final BookRepository repository;
     private final AuthorRepository authorRepository;
+    private final UserService userService;
 
-    BookController(BookRepository repository, AuthorRepository authorRepository) {
+    BookController(BookRepository repository, AuthorRepository authorRepository, UserService userService) {
         this.repository = repository;
         this.authorRepository = authorRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/books")
     List<Book> all() {
         return repository.findAll();
     }
+
+    @GetMapping("/user/books/{id}")
+    List<Book> allByUser(@PathVariable Long id) {
+        return repository.findByUsersId(id);
+    }
+
+    @GetMapping("/user/books")
+    List<Book> allByLoginUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
+
+        return repository.findByUsersId(u.getId());
+    }
+
 
     @PostMapping("/books")
     Book newBook(@RequestBody BookDto newBook) {
@@ -29,10 +49,28 @@ class BookController {
         }
 
         Author author = authorRepository.findAuthorByName(newBook.getAuthor()).get(0);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
 
-        Book book = new Book(newBook.getTitle(), newBook.getCategory(), author, newBook.getPublisher(), newBook.getYear());
+        System.out.println(u);
 
-        return repository.save(book);
+        if(repository.findByTitleAndPublisher(newBook.getTitle(), newBook.getPublisher()).isEmpty()) {
+            Book book = new Book(newBook.getTitle(), newBook.getCategory(), author, newBook.getPublisher(), newBook.getYear());
+
+            book.addUser(u);
+            repository.save(book);
+        } else {
+            Book book = repository.findByTitleAndPublisher(newBook.getTitle(), newBook.getPublisher()).get(0);
+            book.addUser(u);
+
+            System.out.println(u);
+            System.out.println(book);
+            repository.save(book);
+        }
+
+
+        return new Book();
     }
 
     // Single item
@@ -66,6 +104,15 @@ class BookController {
 
     @DeleteMapping("/books/{id}")
     void deleteBook(@PathVariable Long id) {
-        repository.deleteById(id);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
+        Book book = repository.findById(id).get();
+
+        u.getBooks().remove(book);
+        book.getUsers().remove(u);
+
+        repository.save(book);
     }
 }

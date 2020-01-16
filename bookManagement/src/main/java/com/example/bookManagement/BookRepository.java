@@ -11,4 +11,8 @@ public interface BookRepository extends JpaRepository<Book, Long>{
 
     @Query("SELECT DISTINCT b.publisher FROM Book b")
     List<String> findPublishers();
+
+    List<Book> findByUsersId(Long id);
+
+    List<Book> findByTitleAndPublisher(String title, String publisher);
 }

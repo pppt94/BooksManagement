@@ -5,11 +5,9 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +26,9 @@ public class Book {
     private List<Author> authors = new ArrayList<>();
     private String publisher;
     private int year;
+    @JsonIgnore
+    @ManyToMany
+    private List<User> users = new ArrayList<>();
 
     Book() {
     }
@@ -38,6 +39,21 @@ public class Book {
         this.authors.add(author);
         this.publisher = publisher;
         this.year = year;
+    }
+
+
+    Book(String title, String category, Author author, String publisher, int year, User user) {
+        this.title = title;
+        this.category = category;
+        this.authors.add(author);
+        this.publisher = publisher;
+        this.year = year;
+        this.users.add(user);
+    }
+
+    void addUser(User user) {
+        this.users.add(user);
+        //user.getBooks().add(this);
     }
 
     @JsonGetter
