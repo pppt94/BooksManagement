@@ -8,9 +8,11 @@ import java.util.List;
 class BookController {
 
     private final BookRepository repository;
+    private final AuthorRepository authorRepository;
 
-    BookController(BookRepository repository) {
+    BookController(BookRepository repository, AuthorRepository authorRepository) {
         this.repository = repository;
+        this.authorRepository = authorRepository;
     }
 
     @GetMapping("/books")
@@ -19,11 +21,27 @@ class BookController {
     }
 
     @PostMapping("/books")
-    Book newBook(@RequestBody Book newBook) {
-        return repository.save(newBook);
+    Book newBook(@RequestBody BookDto newBook) {
+
+
+        if(authorRepository.findAuthorByName(newBook.getAuthor()).isEmpty()) {
+            authorRepository.save(new Author(newBook.getAuthor()));
+        }
+
+        Author author = authorRepository.findAuthorByName(newBook.getAuthor()).get(0);
+
+        Book book = new Book(newBook.getTitle(), newBook.getCategory(), author, newBook.getPublisher(), newBook.getYear());
+
+        return repository.save(book);
     }
 
     // Single item
+
+
+    @GetMapping("/publishers")
+    List<String> newBook() {
+        return repository.findPublishers();
+    }
 
     @GetMapping("/books/{id}")
     Book one(@PathVariable Long id) {

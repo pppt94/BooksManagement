@@ -11,6 +11,7 @@
     <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.js"></script>
     <script type="text/javascript" language="javascript" src="js/dataTables.bootstrap4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -41,13 +42,53 @@
         </div>
 
         <div id="buttonContainer">
-            <button type="button" class="btn btn-success btn-lg">Add book</button>
-
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#addBookModal">Add book</button>
             <button type="button" class="btn btn-danger btn-lg">Delete book</button>
-
+        </div>
+        <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input type="text" class="form-control" id="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author:</label>
+                            <input type="text" class="form-control" id="author" list="author-datalist">
+                            <datalist id="author-datalist"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <input type="text" class="form-control" id="category">
+                        </div>
+                        <div class="form-group">
+                            <label for="publisher">Publisher:</label>
+                            <input type="text" class="form-control" id="publisher" list="publisher-datalist">
+                            <datalist id="publisher-datalist"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Publication year:</label>
+                            <input type="number" class="form-control" id="date">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="add">Add</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 
 
 </body>
@@ -69,6 +110,59 @@
         "lengthMenu": [8]
     } );
 } );
+
+var authorDataList = document.getElementById('author-datalist');
+var authorInput = document.getElementById('author');
+var publisherDataList = document.getElementById('publisher-datalist');
+var publisherInput = document.getElementById('publisher');
+
+$.ajax({
+    type: "GET",
+    url: "/authors",
+    success: function(data) {
+        $.each(data, function (index, value) {
+            var option = document.createElement('option');
+            option.value = value.name;
+            authorDataList.appendChild(option);
+        });
+    }
+});
+
+$.ajax({
+    type: "GET",
+    url: "/publishers",
+    success: function(data) {
+        $.each(data, function (index, value) {
+            var option = document.createElement('option');
+            option.value = value;
+            publisherDataList.appendChild(option);
+        });
+    }
+});
+
+$("#add").click( function() {
+
+var book = {"title": $('#title').val(),
+            "author": $('#author').val(),
+            "category": $('#category').val(),
+            "publisher": $('#publisher').val(),
+            "year": $('#date').val() };
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/books",
+                data: JSON.stringify(book),
+                contentType: "application/json",
+                dataType: "json",
+                success: function(data){
+                },
+                error: function(errMsg) {
+                }
+            });
+    window.location.reload();
+});
 
 </script>
 </html>

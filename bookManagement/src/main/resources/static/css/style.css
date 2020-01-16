@@ -130,3 +130,7 @@ display: flex;
 justify-content: space-around;
 margin:15px;
 }
+
+#addBookModal{
+text-align:left;
+}
