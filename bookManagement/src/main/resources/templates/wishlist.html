@@ -239,5 +239,20 @@ $.ajax({
 window.location.reload();
 });
 
+$("#make").click( function() {
+    var name = $("#wishlistSelect option:selected").html();
+    var id = $("#wishlistSelect").val();
+
+
+$.ajax({
+    type: "GET",
+    url: "/books/wishlist/add/".concat(id),
+    success: function(data) {
+    }
+});
+
+window.location.reload();
+});
+
 </script>
 </html>

@@ -156,4 +156,20 @@ class BookController {
 
         repository.save(book);
     }
+
+    @GetMapping("/books/wishlist/add/{id}")
+    void moveWishlistBook(@PathVariable Long id) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
+        Book book = repository.findById(id).get();
+
+        u.getWishlistBooks().remove(book);
+        book.getUsersWishlist().remove(u);
+        u.getBooks().add(book);
+        book.getUsers().add(u);
+
+        repository.save(book);
+    }
 }
