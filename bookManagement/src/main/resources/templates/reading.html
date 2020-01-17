@@ -22,7 +22,6 @@
     <a href="/">My books</a>
     <a href="/wishlist">My wishlist</a>
     <a href="/reading">Reading history</a>
-    <a href="/profile">Profile</a>
     <a href="#about">Stats</a>
 </div>
 <div class="board" style="height:100%;">
@@ -48,7 +47,7 @@
         <div id="buttonContainer">
             <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#addReadModal">Add book</button>
         </div>
-        <div class="modal fade" id="addReadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addReadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="text-align:left;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -58,6 +57,42 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input type="text" class="form-control" id="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author:</label>
+                            <input type="text" class="form-control" id="author" list="author-datalist">
+                            <datalist id="author-datalist"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <input type="text" class="form-control" id="category">
+                        </div>
+                        <div class="form-group">
+                            <label for="publisher">Publisher:</label>
+                            <input type="text" class="form-control" id="publisher" list="publisher-datalist">
+                            <datalist id="publisher-datalist"></datalist>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Publication year:</label>
+                            <input type="number" class="form-control" id="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="reading">Reading year:</label>
+                            <input type="number" class="form-control" id="reading">
+                        </div>
+                        <div class="form-group">
+                            <label for="mark">Mark:</label>
+                            <select class="form-control" id="mark">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -68,11 +103,8 @@
         </div>
     </div>
 </div>
-
-
-
-
 </body>
 <script>
+
 </script>
 </html>
