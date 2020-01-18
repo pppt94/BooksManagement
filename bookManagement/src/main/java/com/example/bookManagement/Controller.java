@@ -52,4 +52,9 @@ public class Controller {
     public String reading() {
         return "reading";
     }
+
+    @GetMapping("/stats")
+    public String stats() {
+        return "stats";
+    }
 }
