@@ -25,6 +25,8 @@ public class BookDto {
     private String  author;
     private String publisher;
     private int year;
+    private int reading;
+    private int mark;
 
     BookDto() {
     }

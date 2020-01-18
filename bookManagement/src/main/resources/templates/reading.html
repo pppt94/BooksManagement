@@ -97,7 +97,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="add">Add</button>
+                        <button type="button" class="btn btn-primary" id="addRead">Add</button>
                     </div>
                 </div>
             </div>
@@ -106,6 +106,28 @@
 </div>
 </body>
 <script>
+
+
+$(document).ready(function() {
+    $('#dt').DataTable( {
+
+        "ajax": {
+            "url": "/books/read",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "title"},
+            { "data": "category" },
+            { "data": "authorsNames" },
+            { "data": "publisher" },
+            { "data": "year" },
+
+            { "data": "bookReaders[0].mark" },{ "data": "bookReaders[0].year" }
+        ],
+        "lengthMenu": [8]
+    } );
+} );
+
 var authorDataList = document.getElementById('author-datalist');
 var authorInput = document.getElementById('author');
 var publisherDataList = document.getElementById('publisher-datalist');
@@ -130,12 +152,12 @@ $.ajax({
         });
     }
 });
-
+var id;
 $( "#title" ) .change(function () {
     chooseBook = $("#title").val();
     if(bookListName.includes(chooseBook)) {
         var idx = bookListName.indexOf(chooseBook);
-        var id = bookListIndex[idx];
+        id = bookListIndex[idx];
         $.ajax({
             type: "GET",
             url: "/books/".concat(id),
@@ -156,19 +178,23 @@ $( "#title" ) .change(function () {
     }
 });
 
-$("#add").click( function() {
+$("#addRead").click( function() {
+console.log("NOW");
 
-var book = {"title": $('#title').val(),
+var book = {"id":id,
+            "title": $('#title').val(),
             "author": $('#author').val(),
             "category": $('#category').val(),
             "publisher": $('#publisher').val(),
-            "year": $('#date').val() };
+            "year": $('#date').val(),
+            "reading": $('#reading').val(),
+            "mark": $('#mark').val()};
 
 
 
             $.ajax({
                 type: "POST",
-                url: "/books",
+                url: "/books/read",
                 data: JSON.stringify(book),
                 contentType: "application/json",
                 dataType: "json",

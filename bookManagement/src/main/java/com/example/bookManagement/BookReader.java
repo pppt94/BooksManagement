@@ -1,12 +1,10 @@
 package com.example.bookManagement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
@@ -14,12 +12,17 @@ import java.io.Serializable;
 @Entity
 public class BookReader implements Serializable {
 
-    @Id
+    private @Id
+    @GeneratedValue
+    Long id;
+
+
     @ManyToOne
     @JoinColumn
+    @JsonIgnore
     private Book book;
 
-    @Id
+
     @ManyToOne
     @JoinColumn
     private User reader;

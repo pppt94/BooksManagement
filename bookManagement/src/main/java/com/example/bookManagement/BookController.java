@@ -48,6 +48,15 @@ class BookController {
         return repository.findByUsersWishlistId(u.getId());
     }
 
+    @GetMapping("/books/read")
+    List<Book> readBook() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
+
+        return repository.findByBookReadersReaderId(u.getId());
+    }
+
 
     @PostMapping("/books")
     Book newBook(@RequestBody BookDto newBook) {
@@ -101,6 +110,34 @@ class BookController {
         }
         return new Book();
     }
+
+    @PostMapping("/books/read")
+    Book newReadBook(@RequestBody BookDto newBook) {
+
+
+        if(authorRepository.findAuthorByName(newBook.getAuthor()).isEmpty()) {
+            authorRepository.save(new Author(newBook.getAuthor()));
+        }
+
+        Author author = authorRepository.findAuthorByName(newBook.getAuthor()).get(0);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
+
+
+        if(repository.findByTitleAndPublisher(newBook.getTitle(), newBook.getPublisher()).isEmpty()) {
+            Book book = new Book(newBook.getTitle(), newBook.getCategory(), author, newBook.getPublisher(), newBook.getYear());
+            book.getBookReaders().add(new BookReader(book, u, newBook.getReading(), newBook.getMark()));
+            repository.save(book);
+        } else {
+            Book book = repository.findByTitleAndPublisher(newBook.getTitle(), newBook.getPublisher()).get(0);
+            book.getBookReaders().add(new BookReader(book, u, newBook.getReading(), newBook.getMark()));
+            repository.save(book);
+        }
+        return new Book();
+    }
+
+
 
 
     @GetMapping("/publishers")

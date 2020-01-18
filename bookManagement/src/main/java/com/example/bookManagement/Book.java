@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,9 +34,9 @@ public class Book {
     @JsonIgnore
     @ManyToMany
     private List<User> usersWishlist = new ArrayList<>();
-    @JsonIgnore
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    private Set<BookReader> bookReaders;
+    private Set<BookReader> bookReaders = new HashSet<>();
 
     Book() {
     }

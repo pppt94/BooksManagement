@@ -3,10 +3,7 @@ package com.example.bookManagement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -41,7 +38,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "reader", cascade = CascadeType.ALL)
-    private Set<BookReader> bookReaders;
+    private Set<BookReader> bookReaders = new HashSet<>();
 
     public User() {
     }
