@@ -5,7 +5,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 class BookController {
@@ -39,6 +42,15 @@ class BookController {
         return repository.findByUsersId(u.getId());
     }
 
+    @GetMapping("/user/info")
+    User infoUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
+
+        return u;
+    }
+
     @GetMapping("/user/books/wishlist")
     List<Book> allWishlistByLoginUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -55,6 +67,40 @@ class BookController {
         User u = userService.findByEmail(userDetail.getUsername());
 
         return repository.findByBookReadersReaderId(u.getId());
+    }
+
+    @GetMapping("/books/read/stats")
+    List<List<Integer>> readBookstats() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetail = (UserDetails) auth.getPrincipal();
+        User u = userService.findByEmail(userDetail.getUsername());
+
+        List<Book> listOfBook = repository.findByBookReadersReaderId(u.getId());
+        List<Integer> listOfYear = new ArrayList();
+        List<Integer> data = new ArrayList();
+        List<Integer> column = new ArrayList();
+
+        for (Book book:listOfBook) {
+            for (BookReader bookReader:book.getBookReaders()) {
+                listOfYear.add(bookReader.getYear());
+            }
+        }
+        Map<Integer, Long> counts =
+                listOfYear.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+
+        for (int year:listOfYear) {
+            if(column.contains(year)) {
+                continue;
+            }
+            column.add(year);
+            data.add(counts.get(year).intValue());
+        }
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(column);
+        list.add(data);
+
+        return list;
     }
 
 

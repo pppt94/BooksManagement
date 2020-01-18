@@ -138,3 +138,10 @@ margin:15px;
  #delBookModal{
  text-align:left;
  }
+
+ .chart-container {
+   position: relative;
+   margin: auto;
+   height: 33vh;
+   width: 33vw;
+ }

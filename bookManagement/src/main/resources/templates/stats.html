@@ -38,7 +38,10 @@
                     <label for="mail">E-mail:</label>
                     <input type="text" class="form-control" id="mail" readonly>
                 </div>
-                <canvas id="myChart" width="690" height="250"></canvas>
+                <div class="chart-container">
+                    <canvas id="myChart"></canvas>
+                </div>
+
             </div>
         </div>
 
@@ -47,23 +50,24 @@
 </body>
 <script>
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var data = {
-  labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
-  datasets: [{
-    label: "Car Speed",
-    data: [0, 59, 75, 20, 20, 55, 40],
-  }]
-};
-
-var options = { };
 $(document).ready(function() {
-    var myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: data,
-    options: options
+    var dataset;
+    var label;
+    $.ajax({
+        type: "GET",
+        url: "/books/read/stats",
+        success: function(data) {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var dataChart = {labels: data[0],
+                             datasets: [{label: "Books by Years",data:data[1]}] };
+            console.log(dataChart);
+            var myLineChart = new Chart(ctx, {type: 'line',
+                                              data: dataChart,
+                                              options: {}
+            });
+        }
+    });
 });
-} );
 
 var authorDataList = document.getElementById('author-datalist');
 var authorInput = document.getElementById('author');
@@ -142,6 +146,17 @@ var book = {"id":id,
             });
     window.location.reload();
 });
+
+
+$.ajax({
+        type: "GET",
+        url: "/user/info",
+        success: function(data) {
+            $('#fname').val(data.firstName);
+            $('#lname').val(data.lastName);
+            $('#mail').val(data.email);
+        }
+    });
 
 </script>
 </html>

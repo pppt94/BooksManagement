@@ -33,7 +33,7 @@ public class BookReader implements Serializable {
     BookReader() {
     }
 
-    BookReader(Book book, User reader, int mark, int year) {
+    BookReader(Book book, User reader,  int year, int mark) {
         this.book = book;
         this.reader = reader;
         this.mark = mark;
