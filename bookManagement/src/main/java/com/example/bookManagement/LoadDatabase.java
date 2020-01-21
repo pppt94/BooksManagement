@@ -19,10 +19,10 @@ public class LoadDatabase {
         return args -> {
 
 
-            User u = new User("Jan", "Kowalski", "a@a.a", "aaa");
+            /*User u = new User("Jan", "Kowalski", "a@a.a", "aaa");
             userService.save(u);
 
-            //Authors
+
             Author aut1 = new Author("J.R.R. Tolkien");
             authorRepository.save(aut1);
             Author aut2 = new Author("George Orwell");
@@ -39,7 +39,7 @@ public class LoadDatabase {
             bookRepository.save(new Book("Hobbit", "fantasy", aut1, "CCC", 2000));
             bookRepository.save(new Book("Nineteen Eighty-Four", "novel", aut2, "BBB", 2010));
             bookRepository.save(new Book("Animal Farm", "novel", aut2, "AAA", 2010));
-            bookRepository.save(new Book("Catch-22", "novel", aut3, "AAA", 1990));
+            bookRepository.save(new Book("Catch-22", "novel", aut3, "AAA", 1990)); */
         };
     }
 }
